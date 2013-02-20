@@ -78,15 +78,7 @@ The end result is a bare minimum CentOS installation that effectively only has n
                    mysql-devel crontabs logwatch logrotate sendmail-cf qtwebkit qtwebkit-devel \
                    perl-Time-HiRes
 
-**IMPORTANT NOTE About Redhat EL 6** 
 
-During an installation on an official RHEL 6.3 we found that some packages (in our case gdbm-devel, libffi-devel and libicu-devel) were NOT installed. You MUST make sure that all the packages are installed. The simplest way is to run the above command for a second time and you'll see quite easily of everything is either already installed or "No package XXX available". When you run into this issue you can try installing these required packages from the CentOS distribution.
-
-### Update CentOS to the latest set of patches
-
-*logged in as root*
-
-    yum -y update
 
 
 ## Configure httpd
@@ -502,25 +494,3 @@ Please go over to your profile page and immediately change the password, so
 nobody can access your GitLab by using this login information later on.
 
 **Enjoy!**
-
-
-- - -
-
-
-# Advanced Setup Tips
-
-## Custom Redis Connection
-
-If you'd like Resque to connect to a Redis server on a non-standard port or on
-a different host, you can configure its connection string via the
-`config/resque.yml` file.
-
-    # example
-    production: redis.example.tld:6379
-
-
-## User-contributed Configurations
-
-You can find things like  AWS installation scripts, init scripts or config files
-for alternative web server in our [recipes collection](https://github.com/gitlabhq/gitlab-recipes/).
-
