@@ -1,21 +1,10 @@
 **This installation guide was created for CentOS 6.3 in combination with gitlab 4.0 and tested on it.**
 We also tried this on RHEL 6.3 and found that there are subtle differences that we so far have only documeted in part.
 
-Please read `doc/install/requirements.md` for hardware and platform requirements.
 
 ## Note ##
-This guide installs gitlab on a bare system from scratch using MySQL as the database. All Postgress installation steps are absent as they have not been tested yet.
+This guide installs gitlab on a bare system from scratch using MySQL as the database.
 
-**Important Note:**
-The following steps have been known to work.
-If you deviate from this guide, do it with caution and make sure you don't
-violate any assumptions GitLab makes about its environment.
-For things like AWS installation scripts, init scripts or config files for
-alternative web server have a look at the "Advanced Setup Tips" section.
-
-**Important Note:**
-If you find a bug/error in this guide please submit an issue or pull request
-following the contribution guide (see `CONTRIBUTING.md`).
 
 **Note about accounts:**
 In most cases you are required to run commands as the 'root' user.
@@ -27,10 +16,6 @@ The best way to become that user is by logging in as root and typing
 
     su - gitlab
 
-**Note about security:**
-Many setup guides of Linux software simply state: "disable selinux and firewall".
-The original gitlab installation for ubuntu disables StrictHostKeyChecking completely.
-This guide does not disable any of them, we simply configure them as they were intended.
 
 - - -
 
@@ -49,12 +34,9 @@ The GitLab installation consists of setting up the following components:
 
 # 1. Packages / Dependencies
 
-We start with a completely clean CentOS 6.3 "minimal" installation which can be accomplished by downloading the appropriate installation iso file. Just boot the system of the iso file and install the system.
-
 Note that during the installation you use the *"Configure Network"* option (it's a button in the same screen wher you speciify the hostname) to enable the *"Connect automatically"* option for the network interface and hand (usually eth0). 
 **If you forget this option the network will NOT start at boot.**
 
-The end result is a bare minimum CentOS installation that effectively only has network connectivity and no services at all.
 
 ## Updating and adding basic software and services
 ### Add EPEL repository
@@ -103,9 +85,6 @@ So we create a file called **/etc/httpd/conf.d/gitlab.conf** with this content (
         ProxyPassReverse / http://localhost:3000/
     </VirtualHost>
 
-OPTIONAL: If you want to run other websites on the same system you'll need to enable in **/etc/httpd/conf/httpd.conf** the setting
-
-    NameVirtualHost *:80
 
 Poke an selinux hole for httpd so it can httpd can be in front of gitlab
 
@@ -324,9 +303,7 @@ and make sure you have followed all of the above steps carefully.
     # Checkout to stable release
     git checkout 4-0-stable
 
-**Note:**
-You can change `4-0-stable` to `master` if you want the *bleeding edge* version, but
-do so with caution!
+
 
 ## Configure it
 
@@ -489,8 +466,5 @@ The setup has created an admin account for you. You can use it to log in:
     admin@local.host
     5iveL!fe
 
-**Important Note:**
-Please go over to your profile page and immediately change the password, so
-nobody can access your GitLab by using this login information later on.
 
 **Enjoy!**
