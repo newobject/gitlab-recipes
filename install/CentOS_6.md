@@ -38,7 +38,7 @@ This guide does not disable any of them, we simply configure them as they were i
 
 The GitLab installation consists of setting up the following components:
 
-1. Installing the base operating system (CentOS 6.3 Minimal) and Packages / Dependencies
+1. Packages / Dependencies
 2. Ruby
 3. System Users
 4. Gitolite
@@ -47,7 +47,7 @@ The GitLab installation consists of setting up the following components:
 
 ----------
 
-# 1. Installing the operating system (CentOS 6.3 Minimal)
+# 1. Packages / Dependencies
 
 We start with a completely clean CentOS 6.3 "minimal" installation which can be accomplished by downloading the appropriate installation iso file. Just boot the system of the iso file and install the system.
 
@@ -70,11 +70,11 @@ The end result is a bare minimum CentOS installation that effectively only has n
     yum -y groupinstall 'Development Tools'
 
     ### 'Additional Development'
-    yum -y install vim-enhanced httpd readline readline-devel ncurses-devel gdbm-devel glibc-devel \
+    yum -y install httpd readline readline-devel ncurses-devel gdbm-devel glibc-devel \
                    tcl-devel openssl-devel curl-devel expat-devel db4-devel byacc \
                    sqlite-devel gcc-c++ libyaml libyaml-devel libffi libffi-devel \
                    libxml2 libxml2-devel libxslt libxslt-devel libicu libicu-devel \
-                   system-config-firewall-tui python-devel redis sudo mysql-server wget \
+                   system-config-firewall-tui python-devel wget \
                    mysql-devel crontabs logwatch logrotate sendmail-cf qtwebkit qtwebkit-devel \
                    perl-Time-HiRes
 
@@ -88,25 +88,6 @@ During an installation on an official RHEL 6.3 we found that some packages (in o
 
     yum -y update
 
-## Configure redis
-Just make sure it is started at the next reboot
-
-*logged in as root*
-
-    chkconfig redis on
-    service redis start
-
-## Configure mysql
-Make sure it is started at the next reboot and start it immediately so we can configure it.
-
-*logged in as root*
-
-    chkconfig mysqld on
-    service mysqld start
-
-Secure MySQL by entering a root password and say "Yes" to all questions with the next command
-
-    /usr/bin/mysql_secure_installation
 
 ## Configure httpd
 
@@ -186,11 +167,6 @@ Now enable these settings
     chkconfig sshd on
     service sshd restart
 
-## Reboot
-Now that we have the basics right we reboot the system to load the new kernel and everything.
-After the reboot all of the so far installed services will startup automatically.
-
-    reboot
 
 ----------
 
@@ -403,8 +379,17 @@ The config should look something like this (where supersecret is replaced with y
       pool: 5
       username: root
       password: 
-      # host: localhost
+      host: localhost
       # socket: /tmp/mysql.sock
+    
+    
+## Configure Resque
+
+    cp /home/gitlab/gitlab/config/resque.yml.example /home/gitlab/gitlab/config/resque.yml
+    
+Edit the resque config and set the correct redis ip and port
+
+	vim /home/gitlab/gitlab/config/resque.yml
     
 ## Install Gems
 *logged in as **gitlab***
