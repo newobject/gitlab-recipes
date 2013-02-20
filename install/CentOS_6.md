@@ -111,27 +111,6 @@ The quick way is to put this in the file called **/etc/sysconfig/iptables**
     -A FORWARD -j REJECT --reject-with icmp-host-prohibited
     COMMIT
 
-## Configure email
-
-    cd /etc/mail
-    vim /etc/mail/sendmail.mc
-
-Add a line with the smtp gateway hostname
-
-    define(`SMART_HOST', `smtp.example.com')dnl
-
-Then comment out this line 
-
-    EXPOSED_USER(`root')dnl
-
-by putting 'dnl ' in front of it like this
-
-    dnl EXPOSED_USER(`root')dnl
- 
-Now enable these settings
-
-    make
-    chkconfig sendmail on
 
 ## Make sure ssh server is started
 
@@ -193,21 +172,7 @@ Because the gitlab user will need a password later on, we configure it right now
     # Generate the SSH key
     sudo -u gitlab -H ssh-keygen -q -N '' -t rsa -f /home/gitlab/.ssh/id_rsa
 
-## Forwarding all emails
 
-Now we want all logging of the system to be forwarded to a central email address
-
-*logged in as root*
-
-    echo adminlogs@example.com > /root/.forward
-    chown root /root/.forward
-    chmod 600 /root/.forward
-    restorecon /root/.forward
-
-    echo adminlogs@example.com > /home/gitlab/.forward
-    chown gitlab /home/gitlab/.forward
-    chmod 600 /home/gitlab/.forward
-    restorecon /home/gitlab/.forward
     
 ----------
 
