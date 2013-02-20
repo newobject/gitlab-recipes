@@ -266,7 +266,7 @@ and make sure you have followed all of the above steps carefully.
     cd /home/gitlab/gitlab
    
     # Checkout to stable release
-    git checkout 4-0-stable
+    git checkout 4-2-stable
 
 
 
@@ -317,7 +317,7 @@ The config should look something like this (where supersecret is replaced with y
       # socket: /tmp/mysql.sock
     
     
-## Configure Resque
+## Configure Redis(resque)
 
     cp /home/gitlab/gitlab/config/resque.yml.example /home/gitlab/gitlab/config/resque.yml
     
@@ -376,7 +376,7 @@ used for the `email.from` setting in `config/gitlab.yml`)
 *logged in as **gitlab***
 
     cd /home/gitlab/gitlab
-    bundle exec rake gitlab:app:setup RAILS_ENV=production
+    bundle exec rake gitlab:setup RAILS_ENV=production
 
 The previous command will ask you for the root password of the mysql database and create the defined database and user.
 
@@ -390,7 +390,7 @@ Download the init script (will be /etc/init.d/gitlab)
 
 *logged in as root*
 
-    curl https://raw.github.com/gitlabhq/gitlab-recipes/4-0-stable/init.d/gitlab-centos > /etc/init.d/gitlab
+    curl https://raw.github.com/gitlabhq/gitlab-recipes/master/init.d/gitlab-centos > /etc/init.d/gitlab
     chmod +x /etc/init.d/gitlab
     chkconfig --add gitlab
 
