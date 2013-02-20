@@ -3,7 +3,7 @@ We also tried this on RHEL 6.3 and found that there are subtle differences that 
 
 Please read `doc/install/requirements.md` for hardware and platform requirements.
 
-## Overview ##
+## Note ##
 This guide installs gitlab on a bare system from scratch using MySQL as the database. All Postgress installation steps are absent as they have not been tested yet.
 
 **Important Note:**
@@ -181,6 +181,10 @@ Now enable these settings
     make
     chkconfig sendmail on
 
+## Make sure ssh server is started
+
+    chkconfig sshd on
+    service sshd restart
 
 ## Reboot
 Now that we have the basics right we reboot the system to load the new kernel and everything.
@@ -360,14 +364,15 @@ do so with caution!
 
 Copy the example GitLab config
 
-    cp /home/gitlab/gitlab/config/gitlab.yml{.example,}
+    cp /home/gitlab/gitlab/config/gitlab.yml.example /home/gitlab/gitlab/config/gitlab.yml
 
 Edit the gitlab config to make sure to change "localhost" to the fully-qualified domain name of your host serving GitLab where necessary. Also review the other settings to match your setup.
 
     vim /home/gitlab/gitlab/config/gitlab.yml
 
 Copy the example Unicorn config
-    cp /home/gitlab/gitlab/config/unicorn.rb{.example,}
+
+    cp /home/gitlab/gitlab/config/unicorn.rb.example /home/gitlab/gitlab/config/unicorn.rb
 
 Edit the unicorn config
 
@@ -382,7 +387,7 @@ Also review the other settings to match your setup.
 ## Configure GitLab DB settings
 
     # MySQL
-    cp /home/gitlab/gitlab/config/database.yml{.mysql,}
+    cp /home/gitlab/gitlab/config/database.yml.mysql /home/gitlab/gitlab/config/database.yml
 
 Edit the database config and set the correct username/password
 
@@ -396,8 +401,8 @@ The config should look something like this (where supersecret is replaced with y
       reconnect: false
       database: gitlabhq_production
       pool: 5
-      username: gitlab
-      password: supersecret
+      username: root
+      password: 
       # host: localhost
       # socket: /tmp/mysql.sock
     
@@ -466,7 +471,7 @@ Download the init script (will be /etc/init.d/gitlab)
 
 *logged in as root*
 
-    curl https://raw.github.com/gitlabhq/gitlab-recipes/master/init.d/gitlab-centos > /etc/init.d/gitlab
+    curl https://raw.github.com/gitlabhq/gitlab-recipes/4-0-stable/init.d/gitlab-centos > /etc/init.d/gitlab
     chmod +x /etc/init.d/gitlab
     chkconfig --add gitlab
 
