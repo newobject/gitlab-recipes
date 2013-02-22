@@ -105,7 +105,13 @@ Note that during the installation you use the *"Configure Network"* option (it's
 
 *logged in as root*
 
-    yum install -y gcc* apr-devel apr-util-devel openssh-server openssl-devel curl-devel httpd-devel python-devel python-setuptools libicu-devel ruby-devel libxml2 libxml2-devel libxslt libxslt-devel libyaml-devel libyaml-devel libffi-devel libjpeg-devel patch readline readline-devel zlib zlib-devel make automake autoconf bzip2  git giflib-devel freetype-devel bison
+    yum install -y gcc* apr-devel apr-util-devel openssh-server openssl-devel \
+    			   curl-devel httpd-devel python-devel python-setuptools \
+    			   libicu-devel ruby-devel libxml2 libxml2-devel libxslt \
+    			   libxslt-devel libyaml-devel libyaml-devel libffi-devel \
+    			   libjpeg-devel patch readline readline-devel zlib zlib-devel \
+    			   make automake autoconf bzip2  git giflib-devel \
+    			   freetype-devel bison
     
 ## Install Python2.5+
 
