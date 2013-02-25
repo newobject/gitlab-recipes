@@ -153,12 +153,6 @@ So we create a file called **/etc/httpd/conf.d/gitlab.conf** with this content (
         ProxyPassReverse / http://localhost:3000/
     </VirtualHost>
 
-
-Poke an selinux hole for httpd so it can httpd can be in front of gitlab
-
-    setsebool -P httpd_can_network_connect on
-
-
 ----------
 
 # 2. System Users
