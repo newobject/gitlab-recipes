@@ -279,6 +279,7 @@ and make sure you have followed all of the above steps carefully.
 
     # We'll install GitLab into home directory of the user "gitlab"
     cd /home/gitlab
+    mkdir /home/gitlab/gitlab-satellites
 
 ## Clone the Source
 
@@ -490,5 +491,24 @@ The setup has created an admin account for you. You can use it to log in:
     admin@local.host
     5iveL!fe
 
-
 **Enjoy!**
+
+
+# Others
+
+## Prompts git@server password
+
+If there prompts git@server password, then please fix it using this command:
+
+*logged in as **gitlab***
+
+    cd /home/gitlab/gitlab
+    bundle exec rake gitlab:gitolite:update_keys RAILS_ENV=production
+
+## Please check status after creating a repo
+
+*logged in as **gitlab***
+
+    cd /home/gitlab/gitlab
+    bundle exec rake gitlab:check RAILS_ENV=production
+
