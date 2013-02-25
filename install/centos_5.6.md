@@ -111,7 +111,7 @@ Note that during the installation you use the *"Configure Network"* option (it's
     			   libxslt-devel libyaml-devel libyaml-devel libffi-devel \
     			   libjpeg-devel patch readline readline-devel zlib zlib-devel \
     			   make automake autoconf bzip2  git giflib-devel \
-    			   freetype-devel bison
+    			   freetype-devel bison mysql-devel
     
 ## Install Python2.5+
 
