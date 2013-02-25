@@ -25,7 +25,7 @@ These sortware list need to be installed:
 1. Development Tools
 2. Python 2.5+, easy_install and pip
 3. Ruby 1.9.3, RubyGems and bundle
-4. Git 1.8.1.3
+4. Git 1.7+
 5. Apache2
 6. Gitolite gl-v321
 7. GitLab 4-2-stable
